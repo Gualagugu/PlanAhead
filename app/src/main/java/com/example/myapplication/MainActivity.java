@@ -10,7 +10,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -31,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
         addItemsOnSpinner();
         addListenerOnButton();
     }
-    public void readClassInfo() {
+    private void readClassInfo() {
         InputStream is = getResources().openRawResource(R.raw.sp2018);
         BufferedReader read = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
-        String line = "";
+        String line;
         try {
             while ((line = read.readLine()) != null) {
                 String[] tokens = line.split(",");
@@ -48,10 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 theInfo.setPeople(Integer.parseInt(tokens[5]));
                 theInfo.setPercentageA(Double.parseDouble(tokens[6]));
                 ClassInfoList.add(theInfo);
-                Log.d("MyActivity", "Created" + theInfo.toString());
             }
         } catch (Exception e) {
-            Log.wtf("MyActivity", "Error" + line, e);
             e.printStackTrace();
         }
     }
@@ -59,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
     public void addItemsOnSpinner() {
         select = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
+        for (int i = 0; i < ClassInfoList.size(); i++) {
+            if (ClassInfoList.get(i).getSubject() == null) {
+                continue;
+            }
+            if (i >= 1) {
+                if (ClassInfoList.get(i).getSubject().equals(ClassInfoList.get(i - 1).getSubject())) {
+                    continue;
+                }
+            }
+            list.add(ClassInfoList.get(i).getSubject());
+        }
         list.add("list 1");
         list.add("list 2");
         list.add("list 5");
