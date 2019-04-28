@@ -8,6 +8,21 @@ public class ClassInfo {
     private double percentageA;
     private int people;
 
+    public ClassInfo() {
+    }
+
+    @Override
+    public String toString() {
+        return "ClassInfo{" +
+                "subject='" + subject + '\'' +
+                ", index=" + index +
+                ", instructor='" + instructor + '\'' +
+                ", averageGPA=" + averageGPA +
+                ", percentageA=" + percentageA +
+                ", people=" + people +
+                '}';
+    }
+
     public String getSubject() {
         return subject;
     }
