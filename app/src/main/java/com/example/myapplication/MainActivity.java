@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Button submit;
     private Spinner select;
+    private Spinner index;
+    private Button choose;
+    double averageGPA;
+    double percentageA;
     private List<ClassInfo> ClassInfoList = new ArrayList<>();
 
     @Override
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         readClassInfo();
         addItemsOnSpinner();
+        addListenerOnButton2();
+        addItemsOnSpinner2();
         addListenerOnButton();
     }
     private void readClassInfo() {
@@ -67,26 +73,60 @@ public class MainActivity extends AppCompatActivity {
             }
             list.add(ClassInfoList.get(i).getSubject());
         }
-        list.add("list 1");
-        list.add("list 2");
-        list.add("list 5");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         select.setAdapter(dataAdapter);
     }
+    public void addListenerOnButton2() {
+        choose = (Button) findViewById(R.id.choose);
+
+        choose.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                addItemsOnSpinner2();
+            }
+        });
+    }
+    public void addItemsOnSpinner2() {
+        index = (Spinner) findViewById(R.id.spinner2);
+
+        List<Integer> list2 = new ArrayList<Integer>();
+        for(int i = 0; i < ClassInfoList.size(); i++) {
+            if (String.valueOf(select.getSelectedItem()).equals(ClassInfoList.get(i).getSubject())) {
+                if (i >= 1) {
+                    if(ClassInfoList.get(i).getIndex() == ClassInfoList.get(i - 1).getIndex()) {
+                        continue;
+                    }
+                }
+                list2.add(ClassInfoList.get(i).getIndex());
+            }
+        }
+        ArrayAdapter<Integer> dataAdapter2 = new ArrayAdapter<Integer>(this,
+                android.R.layout.simple_spinner_item, list2);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        index.setAdapter(dataAdapter2);
+    }
     public void addListenerOnButton() {
         select = (Spinner) findViewById(R.id.spinner);
         submit = (Button) findViewById(R.id.submit);
+        index = (Spinner) findViewById(R.id.spinner2);
 
         submit.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
+                for(int i = 0; i < ClassInfoList.size(); i++) {
+                    if (String.valueOf(select.getSelectedItem()).equals(ClassInfoList.get(i).getSubject())
+                        && index.getSelectedItem().equals(ClassInfoList.get(i).getIndex())) {
+                        averageGPA = ClassInfoList.get(i).getAverageGPA();
+                        percentageA = ClassInfoList.get(i).getPercentageA();
+                    }
+                }
                 Toast.makeText(MainActivity.this,
-                        "The average GPA for this course is: " +
-                                "\nSpinner: "+ String.valueOf(select.getSelectedItem()),
+                        "The average GPA for this course is: " + averageGPA
+                                + "The percentage of student geting A in the course is " + percentageA,
                         Toast.LENGTH_LONG).show();
             }
         });
