@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader read = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
-        String line;
+        String line = "";
         try {
             while ((line = read.readLine()) != null) {
                 String[] tokens = line.split(",");
@@ -53,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
                 theInfo.setPeople(Integer.parseInt(tokens[5]));
                 theInfo.setPercentageA(Double.parseDouble(tokens[6]));
                 ClassInfoList.add(theInfo);
+                Log.d("MyActivity", "Created" + theInfo.toString());
             }
         } catch (Exception e) {
+            Log.wtf("MyActivity", "Error" + line, e);
             e.printStackTrace();
         }
     }
