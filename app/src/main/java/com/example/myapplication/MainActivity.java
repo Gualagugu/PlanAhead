@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 theInfo.setInstructor(tokens[3]);
                 theInfo.setPeople(Integer.parseInt(tokens[4]));
                 theInfo.setPercentageA(Double.parseDouble(tokens[5]));
+                ClassInfoList.add(theInfo);
             }
         } catch (Exception e) {
             e.printStackTrace();
