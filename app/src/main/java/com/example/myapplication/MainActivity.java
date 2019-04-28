@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 Toast.makeText(MainActivity.this,
-                        "The average GPA for this course is: " + averageGPA
+                        "The average GPA for this course is: " + averageGPA + "  "
                                 + "The percentage of student geting A in the course is " + percentageA,
                         Toast.LENGTH_LONG).show();
             }
