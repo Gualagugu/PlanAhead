@@ -19,16 +19,16 @@ public class MainActivity extends AppCompatActivity {
 
     private Button submit;
     private Spinner select;
+    private List<ClassInfo> ClassInfoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        readClassInfo();
         addItemsOnSpinner();
         addListenerOnButton();
-        readClassInfo();
     }
-    private List<ClassInfo> ClassInfoList = new ArrayList<>();
     private void readClassInfo() {
         InputStream is = getResources().openRawResource(R.raw.sp2018);
         BufferedReader read = new BufferedReader(
@@ -55,9 +55,12 @@ public class MainActivity extends AppCompatActivity {
     public void addItemsOnSpinner() {
         select = (Spinner) findViewById(R.id.spinner);
         List<String> list = new ArrayList<String>();
+        for (int i = 0; i < ClassInfoList.size(); i++) {
+            list.add(ClassInfoList.get(i).getSubject());
+        }
         list.add("list 1");
         list.add("list 2");
-        list.add("list 3");
+        list.add("list 5");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Toast.makeText(MainActivity.this,
-                        "OnClickListener : " +
+                        "The average GPA for this course is: " +
                                 "\nSpinner: "+ String.valueOf(select.getSelectedItem()),
                         Toast.LENGTH_LONG).show();
             }
