@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,
                         "OnClickListener : " +
                                 "\nSpinner: "+ String.valueOf(select.getSelectedItem()),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
