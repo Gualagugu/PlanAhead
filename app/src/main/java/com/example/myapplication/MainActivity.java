@@ -117,13 +117,31 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                List<Double> averageGPAList = new ArrayList<>();
+                List<Double> percentageAList = new ArrayList<>();
+                List<Integer> peopleList = new ArrayList<>();
                 for(int i = 0; i < ClassInfoList.size(); i++) {
                     if (String.valueOf(select.getSelectedItem()).equals(ClassInfoList.get(i).getSubject())
                         && index.getSelectedItem().equals(ClassInfoList.get(i).getIndex())) {
-                        averageGPA = ClassInfoList.get(i).getAverageGPA();
-                        percentageA = ClassInfoList.get(i).getPercentageA();
+                        averageGPAList.add(ClassInfoList.get(i).getAverageGPA());
+                        percentageAList.add(ClassInfoList.get(i).getPercentageA());
+                        peopleList.add(ClassInfoList.get(i).getPeople());
                     }
                 }
+                int totalPeople = 0;
+                for (int i = 0; i < peopleList.size(); i++) {
+                    totalPeople = totalPeople + peopleList.get(i);
+                }
+                double totalGPA = 0;
+                for (int i = 0; i < averageGPAList.size(); i++) {
+                    totalGPA = totalGPA + peopleList.get(i) * averageGPAList.get(i);
+                }
+                double totalA= 0;
+                for (int i = 0; i < percentageAList.size();i++) {
+                    totalA = totalA + peopleList.get(i) * percentageAList.get(i);
+                }
+                averageGPA = totalGPA/totalPeople;
+                percentageA = totalA/totalPeople;
                 Toast.makeText(MainActivity.this,
                         "The average GPA for this course is: " + averageGPA + "  "
                                 + "The percentage of student geting A in the course is " + percentageA,
