@@ -14,8 +14,9 @@
         android:entries="@android:array/phoneTypes"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.265"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="208dp" />
+        tools:layout_editor_absoluteY="184dp" />
 
     <TextView
         android:id="@+id/ShowGPA"
@@ -23,7 +24,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="390dp" />
+        tools:layout_editor_absoluteY="531dp" />
 
     <TextView
         android:id="@+id/YourGPA"
@@ -31,6 +32,14 @@
         android:layout_height="19dp"
         android:text="The Average GPA is:"
         tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="356dp" />
+        tools:layout_editor_absoluteY="483dp" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        tools:layout_editor_absoluteX="279dp"
+        tools:layout_editor_absoluteY="172dp" />
 
 </android.support.constraint.ConstraintLayout>
