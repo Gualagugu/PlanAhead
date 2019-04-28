@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 theInfo.setIndex(Integer.parseInt(tokens[1]));
                 theInfo.setAverageGPA(Double.parseDouble(tokens[2]));
                 theInfo.setInstructor(tokens[3]);
-                theInfo.setPeople(Integer.parseInt(tokens[4]));
-                theInfo.setPercentageA(Double.parseDouble(tokens[5]));
+                theInfo.setPeople(Integer.parseInt(tokens[5]));
+                theInfo.setPercentageA(Double.parseDouble(tokens[6]));
                 ClassInfoList.add(theInfo);
                 Log.d("MyActivity", "Created" + theInfo.toString());
             }
