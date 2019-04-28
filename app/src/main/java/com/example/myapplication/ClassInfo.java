@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 public class ClassInfo {
     private String subject;
-    private String index;
+    private int index;
     private String instructor;
     private double averageGPA;
     private double percentageA;
@@ -16,7 +16,7 @@ public class ClassInfo {
         return instructor;
     }
 
-    public String getIndex() {
+    public int getIndex() {
         return index;
     }
 
@@ -36,7 +36,7 @@ public class ClassInfo {
         this.subject = subject;
     }
 
-    public void setIndex(String index) {
+    public void setIndex(int index) {
         this.index = index;
     }
 
