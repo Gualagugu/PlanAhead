@@ -144,9 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 averageGPA = totalGPA/totalPeople;
                 percentageA = totalA/totalPeople;
+                averageGPA = Math.round(averageGPA * 100) / 100.0;
+                percentageA = Math.round(percentageA * 100);
                 Toast.makeText(MainActivity.this,
                         "The average GPA for this course is: " + averageGPA + "  "
-                                + "The percentage of student geting A in the course is " + percentageA,
+                                + "The percentage of student geting A in the course is " + percentageA + "%",
                         Toast.LENGTH_LONG).show();
             }
         });
