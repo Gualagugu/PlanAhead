@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     private Spinner select;
     private Spinner index;
     private Button choose;
+    private Button choose2;
+    private Button submit2;
+    private Spinner instructor;
     double averageGPA;
     double percentageA;
     //The two pieces of data that's going to be displayed in the toast message
@@ -37,7 +40,83 @@ public class MainActivity extends AppCompatActivity {
         addListenerOnButton2();
         addItemsOnSpinner2();
         addListenerOnButton();
+        addItemsOnSpinner3();
+        addListenerOnChoose2();
+        addListenerOnSubmit2();
     }
+
+    private void addListenerOnSubmit2() {
+        submit2 = findViewById(R.id.submit2);
+        instructor = findViewById(R.id.spinner3);
+        select = findViewById(R.id.spinner);
+        index =  findViewById(R.id.spinner2);
+        submit2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Double> averageGPAList = new ArrayList<>();
+                List<Double> percentageAList = new ArrayList<>();
+                List<Integer> peopleList = new ArrayList<>();
+                for(int i = 0; i < ClassInfoList.size(); i++) {
+                    if (String.valueOf(select.getSelectedItem()).equals(ClassInfoList.get(i).getSubject())
+                            && index.getSelectedItem().equals(ClassInfoList.get(i).getIndex())
+                            && String.valueOf(instructor.getSelectedItem()).equals(ClassInfoList.get(i).getInstructor())) {
+                        averageGPAList.add(ClassInfoList.get(i).getAverageGPA());
+                        percentageAList.add(ClassInfoList.get(i).getPercentageA());
+                        peopleList.add(ClassInfoList.get(i).getPeople());
+                    }
+                }
+                int totalPeople = 0;
+                for (int i = 0; i < peopleList.size(); i++) {
+                    totalPeople = totalPeople + peopleList.get(i);
+                }
+                double totalGPA = 0;
+                for (int i = 0; i < averageGPAList.size(); i++) {
+                    totalGPA = totalGPA + peopleList.get(i) * averageGPAList.get(i);
+                }
+                double totalA= 0;
+                for (int i = 0; i < percentageAList.size();i++) {
+                    totalA = totalA + peopleList.get(i) * percentageAList.get(i);
+                }
+                averageGPA = totalGPA/totalPeople;
+                percentageA = totalA/totalPeople;
+                averageGPA = Math.round(averageGPA * 100) / 100.0;
+                percentageA = Math.round(percentageA * 100);
+                Toast.makeText(MainActivity.this,
+                        "The average GPA for this section is: " + averageGPA + "  "
+                                + "The percentage of student geting A in the section is " + percentageA + "%",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void addListenerOnChoose2() {
+        choose2 = findViewById(R.id.choose2);
+        choose2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addItemsOnSpinner3();
+            }
+        });
+    }
+
+    private void addItemsOnSpinner3() {
+        instructor = findViewById(R.id.spinner3);
+        List<String> list3 = new ArrayList<String>();
+        for (int i = 0; i < ClassInfoList.size(); i++) {
+            if (String.valueOf(select.getSelectedItem()).equals(ClassInfoList.get(i).getSubject())
+                && index.getSelectedItem().equals(ClassInfoList.get(i).getIndex())) {
+                if (list3.contains(ClassInfoList.get(i).getInstructor())) {
+                    continue;
+                }
+                list3.add(ClassInfoList.get(i).getInstructor());
+            }
+        }
+        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list3);
+        dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        instructor.setAdapter(dataAdapter3);
+    }
+
     private void readClassInfo() {
         InputStream is = getResources().openRawResource(R.raw.source);
         BufferedReader read = new BufferedReader(
