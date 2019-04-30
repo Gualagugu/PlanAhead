@@ -24,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private Button choose;
     double averageGPA;
     double percentageA;
+    //The two pieces of data that's going to be displayed in the toast message
     private List<ClassInfo> ClassInfoList = new ArrayList<>();
+    //A List that stores all ClassInfo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         addListenerOnButton();
     }
     private void readClassInfo() {
-        InputStream is = getResources().openRawResource(R.raw.sp2018);
+        InputStream is = getResources().openRawResource(R.raw.source);
         BufferedReader read = new BufferedReader(
                 new InputStreamReader(is, Charset.forName("UTF-8"))
         );
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.wtf("MyActivity", "Error" + line, e);
             e.printStackTrace();
-        }
+        }//debugging
     }
 
     public void addItemsOnSpinner() {
@@ -68,10 +70,8 @@ public class MainActivity extends AppCompatActivity {
             if (ClassInfoList.get(i).getSubject() == null) {
                 continue;
             }
-            if (i >= 1) {
-                if (ClassInfoList.get(i).getSubject().equals(ClassInfoList.get(i - 1).getSubject())) {
-                    continue;
-                }
+            if (list.contains(ClassInfoList.get(i).getSubject())) {
+                continue;
             }
             list.add(ClassInfoList.get(i).getSubject());
         }
@@ -97,10 +97,8 @@ public class MainActivity extends AppCompatActivity {
         List<Integer> list2 = new ArrayList<Integer>();
         for(int i = 0; i < ClassInfoList.size(); i++) {
             if (String.valueOf(select.getSelectedItem()).equals(ClassInfoList.get(i).getSubject())) {
-                if (i >= 1) {
-                    if(ClassInfoList.get(i).getIndex() == ClassInfoList.get(i - 1).getIndex()) {
-                        continue;
-                    }
+                if(list2.contains(ClassInfoList.get(i).getIndex())) {
+                    continue;
                 }
                 list2.add(ClassInfoList.get(i).getIndex());
             }
