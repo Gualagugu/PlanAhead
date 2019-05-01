@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -154,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             }
             list.add(ClassInfoList.get(i).getSubject());
         }
+        Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -182,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 list2.add(ClassInfoList.get(i).getIndex());
             }
         }
+        Collections.sort(list2);
         ArrayAdapter<Integer> dataAdapter2 = new ArrayAdapter<Integer>(this,
                 android.R.layout.simple_spinner_item, list2);
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
